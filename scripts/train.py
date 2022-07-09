@@ -66,8 +66,7 @@ def train(config):
     gcn_lstm=GNN_LSTM(_model_name=config["model_name"])
     ## Entrenamiento del modelo
     history=gcn_lstm.train(config,matriz_adyacencia,trainX,trainY,testX,testY)
-    with open('./trainHistoryDict', 'wb+') as file_pi:
-        pickle.dump(history, file_pi)
+
 
     ## Se guarda el modelo
     gcn_lstm.save()
