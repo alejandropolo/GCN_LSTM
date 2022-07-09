@@ -124,7 +124,7 @@ class GNN_LSTM:
         plt.savefig('./figures/training_validation_loss.png')
 
     def save(self):
-        """Saves the model to an .h5 file and the model name to a .json file.
+        """Saves the model to an .h5 file
 
         Args:
            filename: Relative path to the file without the extension.

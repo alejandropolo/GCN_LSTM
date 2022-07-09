@@ -33,6 +33,8 @@ logger.setLevel(logging.DEBUG)
 
 
 ### CARGAR EL YAML DE CONFIGURACIÓN
+logger.info(f"-------------------Cargando el YAMl de configuración-------------------")
+
 with open('./scripts/config.yaml') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
@@ -48,25 +50,26 @@ def train(config):
     ##################
     # Entrenamiento del modelo
     ##################
-    logger.info(f"-------------------Load the processed data-------------------")
+    logger.info(f"-------------------Cargando los datos-------------------")
 
     ## Se cargan los datos 
     trainX,trainY,testX,testY,matriz_adyacencia,max_speed,min_speed=load_data(config)
-    logging.info(trainX.shape)
-    logging.info(trainY.shape)
-    logging.info(testX.shape)
-    logging.info(testY.shape)
-
-
-    ### Se cargan las variables de configuración del modelo
+    logging.info("Las dimensiones de los datos de train trainX son: {}".format(trainX.shape))
+    logging.info("Las dimensiones de los datos de train trainY son: {}".format(trainY.shape))
+    logging.info("Las dimensiones de los datos de train testX son: {}".format(testX.shape))
+    logging.info("Las dimensiones de los datos de train testX son: {}".format(testX.shape))
 
 
     ## Se carga el modelo
+    logger.info(f"-------------------Cargando el modelo-------------------")
 
     gcn_lstm=GNN_LSTM(_model_name=config["model_name"])
     ## Entrenamiento del modelo
+    logger.info(f"-------------------Iniciando entreamiento-------------------")
+
     history=gcn_lstm.train(config,matriz_adyacencia,trainX,trainY,testX,testY)
 
+    logger.info(f"-------------------Entreamiento finalizado-------------------")
 
     ## Se guarda el modelo
     gcn_lstm.save()

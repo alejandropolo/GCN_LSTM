@@ -24,13 +24,16 @@ logger.setLevel(logging.DEBUG)
 
 
 ### CARGAR EL YAML DE CONFIGURACIÓN
+
+logger.info(f"-------------------Cargando el YAMl de configuración-------------------")
+
 with open('./scripts/config.yaml') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
 ## CARGA DE LOS DATOS DE VELOCIDADES
 
 ### Lectura de datos
-logging.info("Leyendo los datos de velocidades")
+logging.info(f"-------------------Leyendo los datos de velocidades-------------------")
 speeds_array=pd.read_csv("./data/metr-la.csv")
 
 ### Cambio de nombre de columnas
@@ -43,6 +46,12 @@ speeds_array.columns=nombres_columnas
 speeds_array["timestamp"]=pd.to_datetime(speeds_array["timestamp"])
 speeds_array=speeds_array.set_index("timestamp")
 
+##Corregimos los 0
+logging.info(f"-------------------Corrigiendo los outliers-------------------")
+for i in range(speeds_array.shape[0]):
+    for j in range(speeds_array.shape[1]):
+        if (speeds_array.iloc[i,j]==0):
+            speeds_array.iloc[i,j]=speeds_array.iloc[i-1,j]
 ### Escritura de los datos obtenidos
 speeds_array.to_csv("./data/speeds_array.csv")
 logging.info("Escritura finalizada")
@@ -50,6 +59,7 @@ logging.info("Escritura finalizada")
 
 
 ## DATOS ESPACIALES
+logging.info(f"-------------------Leyendo los datos de espaciales-------------------")
 
 graph_sensor_locations=pd.read_csv("./data/graph_sensor_locations.csv",index_col=0)
 
@@ -70,6 +80,8 @@ def calcular_distancias(graph_sensor_locations,n_nodos):
     return matriz_distancias
 
 ## Calculamos distancias
+logging.info(f"-------------------Calculando matriz de distancias-------------------")
+
 matriz_distancias=calcular_distancias(graph_sensor_locations,graph_sensor_locations.shape[0])
 
 """## CONSTRUCCIÓN MATRIZ DE ADYACENCIA"""
@@ -103,6 +115,7 @@ adjacency_matrix = compute_adjacency_matrix(matriz_distancias, sigma2, epsilon)
 adjacency_matrix=adjacency_matrix+np.identity(adjacency_matrix.shape[0])
 node_indices, neighbor_indices = np.where(adjacency_matrix == 1)
 
+logging.info(f"-------------------Calculando matriz de adyacencis-------------------")
 pd.DataFrame(adjacency_matrix).to_csv("./data/matriz_adyacencia.csv")
 
 
