@@ -16,7 +16,6 @@ lstm_layer_sizes:
 lstm_activations:
   - "tanh"
   - "tanh"
-
 epochs: 5
 batch_size: 128
 model_name: "Model_Adam"

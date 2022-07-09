@@ -133,9 +133,6 @@ class GNN_LSTM:
         filename=self._model_name
         self._model.save('./models/{}'.format(filename))
 
-        # Save base model information
-        with open(filename + '.json', 'w', encoding='utf-8') as f:
-            json.dump(self._model_name, f, ensure_ascii=False, indent=4, sort_keys=True)
 
     def load(self, filename: str):
         """Loads a trained CNN model and the corresponding preprocessing information.
