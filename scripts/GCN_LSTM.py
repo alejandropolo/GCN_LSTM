@@ -45,6 +45,13 @@ class GNN_LSTM:
         lstm_activations=config["lstm_activations"],
         kernel_initializer=tf.keras.initializers.GlorotNormal()
         )
+        tensorboard_callback = tf.keras.callbacks.TensorBoard(
+            log_dir=os.path.abspath("./logs"), histogram_freq=0,
+            write_graph=True, write_grads=False,
+            write_images=False, embeddings_freq=0,
+            embeddings_layer_names=None, embeddings_metadata=None,
+            embeddings_data=None, update_freq='epoch'
+        )
 
         x_input, x_output = gcn_lstm.in_out_tensors()
 
@@ -54,7 +61,7 @@ class GNN_LSTM:
             to_file="./figures/model.png"
         )
 
-        self._model.compile(optimizer="adam", loss="mae", metrics=["mse"])
+        self._model.compile(optimizer="adam", loss="mae", metrics=["mse"],callbacks=tensorboard_callback)
 
         history = self._model.fit(
             trainX,
