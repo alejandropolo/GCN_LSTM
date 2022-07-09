@@ -1,5 +1,4 @@
 # Carpeta a ignorar
-logs
 __pycache__
 figures
 models
@@ -11,5 +10,11 @@ models
 
 scripts/trial.py
 notebooks/trials.ipynb
-
-trainHistoryDict
+# exclude everything
+logs/*
+figures/*
+models/*
+# exception to the rule
+!logs/.gitkeep 
+!figures/.gitkeep 
+!models/.gitkeep 
