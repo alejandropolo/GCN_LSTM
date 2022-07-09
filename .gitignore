@@ -12,3 +12,4 @@ models
 scripts/trial.py
 notebooks/trials.ipynb
 
+trainHistoryDict
