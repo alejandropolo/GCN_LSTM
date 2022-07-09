@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-from keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping, TensorBoard
 from keras.callbacks import ModelCheckpoint
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,7 +16,7 @@ from stellargraph.layer import GCN_LSTM
 import json
 from numpy.random import seed
 from sklearn.metrics import mean_absolute_error,mean_absolute_percentage_error,mean_squared_error
-
+import os
 
 class GNN_LSTM:
     """_summary_
@@ -45,14 +45,15 @@ class GNN_LSTM:
         lstm_activations=config["lstm_activations"],
         kernel_initializer=tf.keras.initializers.GlorotNormal()
         )
-        tensorboard_callback = tf.keras.callbacks.TensorBoard(
+        tensorboard_callback = TensorBoard(
             log_dir=os.path.abspath("./logs"), histogram_freq=0,
             write_graph=True, write_grads=False,
             write_images=False, embeddings_freq=0,
             embeddings_layer_names=None, embeddings_metadata=None,
             embeddings_data=None, update_freq='epoch'
         )
-
+        es = EarlyStopping(monitor='val_loss', mode='max', verbose=1, patience=20)
+        callbacks = [tensorboard_callback,es]
         x_input, x_output = gcn_lstm.in_out_tensors()
 
         self._model = Model(inputs=x_input, outputs=x_output)
@@ -61,7 +62,7 @@ class GNN_LSTM:
             to_file="./figures/model.png"
         )
 
-        self._model.compile(optimizer="adam", loss="mae", metrics=["mse"],callbacks=tensorboard_callback)
+        self._model.compile(optimizer="adam", loss="mae", metrics=["mse"])
 
         history = self._model.fit(
             trainX,
@@ -71,6 +72,7 @@ class GNN_LSTM:
             shuffle=True,
             verbose=1,
             validation_data=[testX, testY],
+            callbacks=callbacks
         )
         self._plot_training(history)
 
