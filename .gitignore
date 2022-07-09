@@ -1,7 +1,6 @@
 # Carpeta a ignorar
 __pycache__
-figures
-models
+
 
 ## Extensiones 
 
@@ -12,9 +11,11 @@ scripts/trial.py
 notebooks/trials.ipynb
 # exclude everything
 logs/*
-figures/*
-models/*
+
 # exception to the rule
 !logs/.gitkeep 
+
+figures/*
+models/*
 !figures/.gitkeep 
 !models/.gitkeep 
