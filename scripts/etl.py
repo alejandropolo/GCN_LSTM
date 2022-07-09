@@ -3,7 +3,7 @@
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
-import geopy.distance
+from geopy.distance import geodesic
 import logging
 from datetime import datetime
 import yaml
@@ -64,7 +64,7 @@ def calcular_distancias(graph_sensor_locations,n_nodos):
       for j in range(i):
         coords_1 = graph_sensor_locations.iloc[i][["latitude","longitude"]].values
         coords_2 = graph_sensor_locations.iloc[j][["latitude","longitude"]].values
-        matriz_distancias[i,j]=geopy.distance.geodesic(coords_1, coords_2).m
+        matriz_distancias[i,j]=geodesic(coords_1, coords_2).m
         matriz_distancias[j,i]=matriz_distancias[i,j] ##Que sea simétrica
 
     return matriz_distancias

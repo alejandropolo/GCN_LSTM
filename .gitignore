@@ -1,8 +1,14 @@
-# Ignora la carpeta node_modules
+# Carpeta a ignorar
 logs
 __pycache__
+figures
+models
+
+## Extensiones 
+
 .ipynb_checkpoints
 .pytest_cache
 
-./scripts/trial.py
-./notebooks/trial.ipynb
+scripts/trial.py
+notebooks/trials.ipynb
+
