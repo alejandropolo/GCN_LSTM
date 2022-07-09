@@ -19,3 +19,6 @@ lstm_activations:
 epochs: 20
 batch_size: 128
 model_name: "Model_Adam"
+optimizer_name: "Adam"
+learning_rate: 0.002
+momentum: 0.8

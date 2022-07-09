@@ -52,17 +52,24 @@ class GNN_LSTM:
             embeddings_layer_names=None, embeddings_metadata=None,
             embeddings_data=None, update_freq='epoch'
         )
-        es = EarlyStopping(monitor='val_loss', mode='max', verbose=1, patience=20)
-        callbacks = [tensorboard_callback,es]
+
         x_input, x_output = gcn_lstm.in_out_tensors()
 
+        es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=20)
+        callbacks = [tensorboard_callback,es]
+
+        if config["optimizer_name"]== "Adam":
+            optimizer = tf.keras.optimizers.Adam(learning_rate=config["learning_rate"], beta_1=0.5)
+        elif config["optimizer_name"] == "SGD":
+            keras.optimizers.SGD(learning_rate=config["learning_rate"], momentum=config["momentum"], nesterov=True, name='SGD')
+        
         self._model = Model(inputs=x_input, outputs=x_output)
         tf.keras.utils.plot_model(
             self._model,
             to_file="./figures/model.png"
         )
 
-        self._model.compile(optimizer="adam", loss="mae", metrics=["mse"])
+        self._model.compile(optimizer=optimizer, loss="mae", metrics=["mse"])
 
         history = self._model.fit(
             trainX,
@@ -78,21 +85,6 @@ class GNN_LSTM:
 
         return history
 
-    
-    def predict(self,config,trainX,trainY,testX,testY):
-
-        ythat = self._model.predict(trainX)
-        yhat = self._model.predict(testX)
-
-        ## actual train and test values
-        train_true = np.array(trainY * self._max_speed)
-        #test_rescref = np.array(testY[:,:,0] * max_speed)
-        test_true = np.array(testY * self._max_speed)
-        ## Rescale model predicted values
-        train_pred = np.array((ythat) * self._max_speed)
-        test_pred = np.array((yhat) * self._max_speed)
-
-        return train_true,test_true,train_pred,test_pred
 
 
 
