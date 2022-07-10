@@ -31,7 +31,6 @@ import tensorflow.compat.v2 as tf
 from keras import backend
 from keras.distribute import distributed_file_utils
 from keras.distribute import worker_training_state
-from keras.optimizers.schedules import learning_rate_schedule
 from keras.utils import generic_utils
 from keras.utils import io_utils
 from keras.utils import tf_utils
