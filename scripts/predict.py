@@ -65,7 +65,7 @@ def predict(config):
     mse_naive=mean_squared_error(test_pred_naive[:len(test_true)],test_true)
     logging.info("El mae del modelo es {} y el mae del modelo naive es {}".format(mae,mae_naive))
     logging.info("El mse del modelo es {} y el mse del modelo naive es {}".format(mse,mse_naive))
-    return mae,mae_naive,mse,mse_naive
+    return train_true,test_true,test_pred,test_pred_naive
 
 if __name__ == "__main__":
     predict(config)
