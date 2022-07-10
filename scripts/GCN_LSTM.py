@@ -8,15 +8,13 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import Sequential, Model
-from tensorflow.keras.layers import LSTM, Dense, Dropout, Input
 from tensorflow.keras import layers
-from tensorflow.keras.callbacks import EarlyStopping,ModelCheckpoint,ReduceLROnPlateau
+from tensorflow.keras.callbacks import EarlyStopping,ReduceLROnPlateau
 import stellargraph as sg
 from stellargraph.layer import GCN_LSTM
-import json
 from numpy.random import seed
-from sklearn.metrics import mean_absolute_error,mean_absolute_percentage_error,mean_squared_error
 import os
+from best_model_callback import ModelCheckpoint
 
 class GNN_LSTM:
     """_summary_
@@ -54,9 +52,9 @@ class GNN_LSTM:
         )
 
         x_input, x_output = gcn_lstm.in_out_tensors()
-
+        mc = ModelCheckpoint('best_model.h5', monitor='val_mse', mode='min', verbose=1,min_delta=0.0001, save_best_only=True)
         es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50,min_delta=0.001)
-        callbacks = [tensorboard_callback,es]
+        callbacks = [tensorboard_callback,es,mc]
 
         if config["optimizer_name"]== "Adam":
             optimizer = tf.keras.optimizers.Adam(learning_rate=config["learning_rate"], beta_1=0.5)

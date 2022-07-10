@@ -1,9 +1,9 @@
 sigma2: 0.1
 epsilon: 0.5
 train_rate: 0.8
-seq_len: 10
+seq_len: 12
 pre_len: 6
-dropout: 0.5
+dropout: 0.2
 gc_layer_sizes:
   - 16
   - 10
@@ -14,11 +14,11 @@ lstm_layer_sizes:
   - 200
   - 200
 lstm_activations:
-  - "tanh"
-  - "tanh"
-epochs: 20
-batch_size: 128
-model_name: "Model_Adam"
+  - "relu"
+  - "relu"
+epochs: 1000
+batch_size: 60
+model_name: "Model_Adam_00001"
 optimizer_name: "Adam"
-learning_rate: 0.002
+learning_rate: 0.00001
 momentum: 0.8
