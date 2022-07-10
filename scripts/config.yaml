@@ -21,4 +21,4 @@ batch_size: 60
 model_name: "Model_Adam_00001"
 optimizer_name: "Adam"
 learning_rate: 0.00001
-momentum: 0.8
+momentum: 0.7
