@@ -55,7 +55,7 @@ class GNN_LSTM:
 
         x_input, x_output = gcn_lstm.in_out_tensors()
 
-        es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=20)
+        es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50,min_delta=0.001)
         callbacks = [tensorboard_callback,es]
 
         if config["optimizer_name"]== "Adam":
