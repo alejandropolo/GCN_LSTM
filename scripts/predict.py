@@ -41,7 +41,7 @@ def predict(config):
     logger.info(f"-------------------Load the processed data-------------------")
     trainX,trainY,testX,testY,matriz_adyacencia,max_speed,min_speed=load_data(config)
     logger.info(f"-------------------Load the model-------------------")
-    model = tf.keras.models.load_model('./models/{}'.format(config["model_name"]))
+    model = tf.keras.models.load_model('./models/checkpoint/best_model')
 
     ythat = model.predict(trainX)
     yhat = model.predict(testX)
