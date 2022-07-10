@@ -76,7 +76,7 @@ class GNN_LSTM:
             batch_size=config["batch_size"],
             shuffle=True,
             verbose=1,
-            validation_data=[testX, testY],
+            validation_split=0.2,
             callbacks=callbacks
         )
         self._plot_training(history)
