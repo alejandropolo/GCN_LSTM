@@ -14,8 +14,19 @@ lstm_layer_sizes:
   - 200
   - 200
 lstm_activations:
+<<<<<<< Updated upstream
   - "tanh"
   - "tanh"
 epochs: 5
 batch_size: 128
 model_name: "Model_Adam"
+=======
+  - "relu"
+  - "relu"
+epochs: 1000
+batch_size: 60
+model_name: "Model_Adam_00005"
+optimizer_name: "Adam"
+learning_rate: 0.00005
+momentum: 0.7
+>>>>>>> Stashed changes
