@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 from keras.callbacks import EarlyStopping, TensorBoard
-from keras.callbacks import ModelCheckpoint
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
