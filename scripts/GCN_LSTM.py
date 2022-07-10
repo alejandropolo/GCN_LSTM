@@ -51,7 +51,7 @@ class GNN_LSTM:
         )
 
         x_input, x_output = gcn_lstm.in_out_tensors()
-        mc = ModelCheckpoint('best_model.h5', monitor='val_mse', mode='min', verbose=1,min_delta=0.0001, save_best_only=True)
+        mc = ModelCheckpoint('best_model.h5', monitor='val_loss', mode='min', verbose=1,min_delta=0.0001, save_best_only=True)
         es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50,min_delta=0.001)
         callbacks = [tensorboard_callback,es,mc]
 
