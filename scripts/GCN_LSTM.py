@@ -52,7 +52,7 @@ class GNN_LSTM:
 
         x_input, x_output = gcn_lstm.in_out_tensors()
         mc = ModelCheckpoint('best_model.h5', monitor='val_loss', mode='min', verbose=1,min_delta=0.0001, save_best_only=True)
-        es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50,min_delta=0.001)
+        es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50,min_delta=0.0001)
         callbacks = [tensorboard_callback,es,mc]
 
         if config["optimizer_name"]== "Adam":
@@ -73,7 +73,7 @@ class GNN_LSTM:
             trainY,
             epochs=config["epochs"],
             batch_size=config["batch_size"],
-            shuffle=True,
+            shuffle=False,
             verbose=1,
             validation_split=0.2,
             callbacks=callbacks
