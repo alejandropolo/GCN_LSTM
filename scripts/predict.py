@@ -65,6 +65,11 @@ def predict(config):
     mse_naive=mean_squared_error(test_pred_naive[:len(test_true)],test_true)
     logging.info("El mae del modelo es {} y el mae del modelo naive es {}".format(mae,mae_naive))
     logging.info("El mse del modelo es {} y el mse del modelo naive es {}".format(mse,mse_naive))
+
+    plt.plot(test_pred[200:300,0],color="lightseagreen",label="Predicción GCN-LSTM")
+    plt.plot(test_true[200:300,0],color="cornflowerblue",label="Valores Reales")
+    plt.plot(test_pred_naive[200:300,0],color="orange",label="Predicción Naive")
+    plt.savefig('./figures/comparacion_predicciones.png')
     return train_true,test_true,test_pred,test_pred_naive
 
 if __name__ == "__main__":

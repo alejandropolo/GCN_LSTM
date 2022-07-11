@@ -66,7 +66,7 @@ class GNN_LSTM:
             to_file="./figures/model.png"
         )
 
-        self._model.compile(optimizer=optimizer, loss="mae", metrics=[tf.keras.metrics.MeanSquaredError()])
+        self._model.compile(optimizer=optimizer, loss="mae", metrics=[tf.keras.metrics.MeanSquaredError(),tf.keras.metrics.RootMeanSquaredError()])
 
         history = self._model.fit(
             trainX,
