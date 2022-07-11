@@ -66,7 +66,7 @@ class GNN_LSTM:
             to_file="./figures/model.png"
         )
 
-        self._model.compile(optimizer=optimizer, loss="mae", metrics=["mse"])
+        self._model.compile(optimizer=optimizer, loss="mae", metrics=[tf.keras.metrics.MeanSquaredError()])
 
         history = self._model.fit(
             trainX,
@@ -75,7 +75,7 @@ class GNN_LSTM:
             batch_size=config["batch_size"],
             shuffle=False,
             verbose=1,
-            validation_split=0.2,
+            validation_split=config["val_split"],
             callbacks=callbacks
         )
         self._plot_training(history)

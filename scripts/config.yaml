@@ -3,9 +3,9 @@ epsilon: 0.5
 train_rate: 0.8
 seq_len: 12
 pre_len: 6
-dropout: 0.4
+dropout: 0.2
 gc_layer_sizes:
-  - 32
+  - 16
   - 10
 gc_activations:
   - "relu"
@@ -22,3 +22,4 @@ model_name: "Model_Adam_00005"
 optimizer_name: "Adam"
 learning_rate: 0.0005
 momentum: 0.7
+val_split: 0.15
