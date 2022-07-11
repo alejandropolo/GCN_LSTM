@@ -66,10 +66,39 @@ def predict(config):
     mse_naive=mean_squared_error(test_pred_naive[:len(test_true)],test_true)
     logging.info("El mae del modelo es {} y el mae del modelo naive es {}".format(mae,mae_naive))
     logging.info("El mse del modelo es {} y el mse del modelo naive es {}".format(mse,mse_naive))
+    seg_mael = []
+    seg_masel = []
+    seg_nmael = []
+
+    for j in range(testX.shape[-1]):
+
+        seg_mael.append(
+            np.mean(np.abs(test_true.T[j] - test_pred.T[j]))
+        )  # Mean Absolute Error for NN
+        seg_nmael.append(
+            np.mean(np.abs(test_true.T[j] - test_pred_naive.T[j]))
+        )  # Mean Absolute Error for naive prediction
+        if seg_nmael[-1] != 0:
+            seg_masel.append(
+                seg_mael[-1] / seg_nmael[-1]
+            )  # Ratio of the two: Mean Absolute Scaled Error
+        else:
+            seg_masel.append(np.NaN)
+
+    logging.info("Total (ave) MAE for NN: " + str(np.mean(np.array(seg_mael))))
+    logging.info("Total (ave) MAE for naive prediction: " + str(np.mean(np.array(seg_nmael))))
+    logging.info(
+        "Total (ave) MASE for per-segment NN/naive MAE: "
+        + str(np.nanmean(np.array(seg_masel)))
+    )
+    logging.info(
+        "...note that MASE<1 (for a given segment) means that the NN prediction is better than the naive prediction."
+    )
 
     plt.plot(test_pred[200:300,0],color="lightseagreen",label="Predicción GCN-LSTM")
     plt.plot(test_true[200:300,0],color="cornflowerblue",label="Valores Reales")
     plt.plot(test_pred_naive[200:300,0],color="orange",label="Predicción Naive")
+    plt.legend()
     plt.savefig('./figures/comparacion_predicciones.png')
     return train_true,test_true,test_pred,test_pred_naive
 
