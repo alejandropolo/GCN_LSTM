@@ -93,8 +93,8 @@ class GNN_LSTM:
             history: Training history.
 
         """
-        training_mse = history.history['mse']
-        validation_mse = history.history['val_mse']
+        training_mse = history.history['mean_squared_error']
+        validation_mse = history.history['val_mean_squared_error']
         loss = history.history['loss']
         val_loss = history.history['val_loss']
         epochs = range(len(training_mse))
