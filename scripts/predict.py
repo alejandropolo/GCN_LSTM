@@ -61,6 +61,7 @@ def predict(config):
     test_pred_naive = (test_pred_naive) * max_speed
     
     mae=mean_absolute_error(test_pred,test_true)
+    bias=np.mean(test_pred-test_true)
     mae_naive=mean_absolute_error(test_pred_naive[:len(test_true)],test_true)
     mse=mean_squared_error(test_pred,test_true)
     mse_naive=mean_squared_error(test_pred_naive[:len(test_true)],test_true)
@@ -69,6 +70,7 @@ def predict(config):
     r2=mean_absolute_percentage_error(test_pred,test_true)
     r2_naive=r2_score(test_pred_naive[:len(test_true)],test_true)    
     logging.info("El mae del modelo es {} y el mae del modelo naive es {}".format(mae,mae_naive))
+    logging.info("El bias del modelo es {}".format(bias))
     logging.info("El mse del modelo es {} y el mse del modelo naive es {}".format(mse,mse_naive))
     logging.info("El mape del modelo es {} y el mape del modelo naive es {}".format(mape,mape_naive))
     logging.info("El mape del modelo es {} y el mape del modelo naive es {}".format(r2,r2_naive))
