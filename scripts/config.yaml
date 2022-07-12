@@ -1,11 +1,11 @@
 sigma2: 0.1
 epsilon: 0.5
 train_rate: 0.8
-seq_len: 12
-pre_len: 6
+seq_len: 6
+pre_len: 12
 dropout: 0.2
 gc_layer_sizes:
-  - 16
+  - 32
   - 10
 gc_activations:
   - "relu"
@@ -14,8 +14,8 @@ lstm_layer_sizes:
   - 200
   - 200
 lstm_activations:
-  - "relu"
-  - "relu"
+  - "tanh"
+  - "tanh"
 epochs: 1000
 batch_size: 60
 model_name: "Model_Adam_00005"

@@ -11,7 +11,7 @@ import logging
 import yaml
 from datetime import datetime
 import numpy as np
-from sklearn.metrics import mean_absolute_error,mean_absolute_percentage_error,mean_squared_error
+from sklearn.metrics import mean_absolute_error,mean_absolute_percentage_error,mean_squared_error,r2_score
 from utility import load_data
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -64,8 +64,16 @@ def predict(config):
     mae_naive=mean_absolute_error(test_pred_naive[:len(test_true)],test_true)
     mse=mean_squared_error(test_pred,test_true)
     mse_naive=mean_squared_error(test_pred_naive[:len(test_true)],test_true)
+    mape=mean_absolute_percentage_error(test_pred,test_true)
+    mape_naive=mean_absolute_percentage_error(test_pred_naive[:len(test_true)],test_true)
+    r2=mean_absolute_percentage_error(test_pred,test_true)
+    r2_naive=r2_score(test_pred_naive[:len(test_true)],test_true)    
     logging.info("El mae del modelo es {} y el mae del modelo naive es {}".format(mae,mae_naive))
     logging.info("El mse del modelo es {} y el mse del modelo naive es {}".format(mse,mse_naive))
+    logging.info("El mape del modelo es {} y el mape del modelo naive es {}".format(mape,mape_naive))
+    logging.info("El mape del modelo es {} y el mape del modelo naive es {}".format(r2,r2_naive))
+    logging.info("El MASE del modelo es: {}".format(mae/mae_naive))
+
     seg_mael = []
     seg_masel = []
     seg_nmael = []
@@ -95,9 +103,9 @@ def predict(config):
         "...note that MASE<1 (for a given segment) means that the NN prediction is better than the naive prediction."
     )
 
-    plt.plot(test_pred[200:300,0],color="lightseagreen",label="Predicción GCN-LSTM")
-    plt.plot(test_true[200:300,0],color="cornflowerblue",label="Valores Reales")
-    plt.plot(test_pred_naive[200:300,0],color="orange",label="Predicción Naive")
+    plt.plot(test_pred[250:300,0],color="lightseagreen",label="Predicción GCN-LSTM")
+    plt.plot(test_true[250:300,0],color="cornflowerblue",label="Valores Reales")
+    plt.plot(test_pred_naive[250:300,0],color="orange",label="Predicción Naive")
     plt.legend()
     plt.savefig('./figures/comparacion_predicciones.png')
     return train_true,test_true,test_pred,test_pred_naive
