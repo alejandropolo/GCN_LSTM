@@ -12,11 +12,11 @@ The proposed model combines the power of GCN and LSTM to capture both the graph 
 
 ## Repository Structure
 
-data/: This directory contains the necessary dataset for training and evaluating the model. It may include files such as historical traffic speed data, road network information, and other relevant data.
-scripts/: This directory contains the implementation of the GCN+LSTM model architecture, including the code for the GCN layer, LSTM layer, and any additional components.
-train.py: This script is used to train the GCN+LSTM model using the provided dataset. It includes functions for data preprocessing, model training, and evaluation.
-predict.py: This script allows the user to make predictions using the trained model. It takes as input the current traffic data and outputs the predicted traffic speeds for future time steps.
-requirements.txt: This file lists all the required dependencies and their versions to run the code successfully.
+1. data/: This directory contains the necessary dataset for training and evaluating the model. It may include files such as historical traffic speed data, road network information, and other relevant data.
+2. scripts/: This directory contains the implementation of the GCN+LSTM model architecture, including the code for the GCN layer, LSTM layer, and any additional components.
+3. train.py: This script is used to train the GCN+LSTM model using the provided dataset. It includes functions for data preprocessing, model training, and evaluation.
+4. predict.py: This script allows the user to make predictions using the trained model. It takes as input the current traffic data and outputs the predicted traffic speeds for future time steps.
+5. requirements.txt: This file lists all the required dependencies and their versions to run the code successfully.
 
 ## Getting Started
 
