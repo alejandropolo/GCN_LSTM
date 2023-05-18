@@ -22,12 +22,14 @@ requirements.txt: This file lists all the required dependencies and their versio
 
 To use the GCN+LSTM model for traffic speed prediction, follow these steps:
 
-Clone this repository: git clone https://github.com/alejandropolo/GCN_LSTM.git
-Install the required dependencies: pip install -r requirements.txt
-Prepare the dataset by placing the necessary files in the data/ directory.
-Run the training script to train the model: python train.py
-After training, you can use the predict.py script to make predictions.
+1. Clone this repository: git clone https://github.com/alejandropolo/GCN_LSTM.git
+2. Install the required dependencies: pip install -r requirements.txt
+3. Prepare the dataset by placing the necessary files in the data/ directory.
+4. Run the training script to train the model: python train.py
+5. After training, you can use the predict.py script to make predictions.
+
 Feel free to explore the code and customize it according to your specific requirements.
 
-Conclusion
+## Conclusion
+
 This repository provides a GCN+LSTM model for traffic speed prediction, which combines the strengths of graph convolutional networks and long short-term memory networks. By leveraging both spatial and temporal information in traffic data, this model can make accurate predictions of future traffic speeds. We hope this repository serves as a useful resource for researchers and practitioners working in the field of traffic management and transportation systems optimization.
